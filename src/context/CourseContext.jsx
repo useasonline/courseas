@@ -29,7 +29,17 @@ export const CourseProvider = ({ children }) => {
   // Enrollments state keyed by `userId_courseId`
   const [enrollments, setEnrollments] = useState(() => {
     const saved = localStorage.getItem('useera_enrollments');
-    return saved ? JSON.parse(saved) : {
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+          return parsed;
+        }
+      } catch (e) {
+        console.warn("Failed to parse stored enrollments", e);
+      }
+    }
+    return {
       "demo-learner-123_useera-ai-01": {
         courseId: "useera-ai-01",
         userId: "demo-learner-123",
