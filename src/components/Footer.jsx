@@ -33,7 +33,7 @@ export default function Footer({ setActivePage }) {
             <h4 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#FFF', marginBottom: '16px' }}>Useera Resources</h4>
             <ul style={{ listStyle: 'none', fontSize: '0.85rem', color: '#94A3B8', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <li style={{ cursor: 'pointer' }} onClick={() => setActivePage('dashboard')}>My Enrolled Learning</li>
-              <li style={{ cursor: 'pointer' }} onClick={() => setActivePage('admin')}>Admin Studio</li>
+              <li style={{ cursor: 'pointer' }} onClick={() => window.location.href = './admin.html'}>Admin Studio</li>
               <li>Certificates Verification</li>
               <li>Help & Support</li>
             </ul>
