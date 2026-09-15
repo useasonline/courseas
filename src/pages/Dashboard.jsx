@@ -8,10 +8,10 @@ export default function Dashboard({ setActivePage, onLearn, onSelectCourse }) {
   const { courses, enrollments } = useCourses();
 
   // Filter enrollments for current user
-  const userEnrollments = Object.entries(enrollments)
-    .filter(([key, data]) => data.userId === currentUser?.uid)
+  const userEnrollments = Object.entries(enrollments || {})
+    .filter(([key, data]) => data && currentUser?.uid && data.userId === currentUser.uid)
     .map(([key, data]) => {
-      const course = courses.find(c => c.id === data.courseId);
+      const course = (courses || []).find(c => c && c.id === data.courseId);
       return { ...data, course };
     })
     .filter(item => item.course !== undefined);
