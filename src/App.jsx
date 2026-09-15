@@ -75,19 +75,39 @@ function MainAppContent() {
           />
         )}
 
-        {activePage === 'detail' && selectedCourse && (
-          <CourseDetail 
-            course={selectedCourse}
-            onEnroll={handleEnroll}
-            onLearn={handleLearn}
-          />
+        {activePage === 'detail' && (
+          selectedCourse ? (
+            <CourseDetail 
+              course={selectedCourse}
+              onEnroll={handleEnroll}
+              onLearn={handleLearn}
+            />
+          ) : (
+            <Catalog 
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+              onSelectCourse={handleSelectCourse}
+              onEnroll={handleEnroll}
+              onLearn={handleLearn}
+            />
+          )
         )}
 
-        {activePage === 'learn' && selectedCourse && (
-          <LearnView 
-            course={selectedCourse}
-            onBack={() => setActivePage('catalog')}
-          />
+        {activePage === 'learn' && (
+          selectedCourse ? (
+            <LearnView 
+              course={selectedCourse}
+              onBack={() => setActivePage('catalog')}
+            />
+          ) : (
+            <Catalog 
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+              onSelectCourse={handleSelectCourse}
+              onEnroll={handleEnroll}
+              onLearn={handleLearn}
+            />
+          )
         )}
 
         {activePage === 'dashboard' && (
@@ -100,6 +120,16 @@ function MainAppContent() {
 
         {activePage === 'login' && (
           <Login setActivePage={setActivePage} />
+        )}
+
+        {!['home', 'catalog', 'detail', 'learn', 'dashboard', 'login'].includes(activePage) && (
+          <Home 
+            setActivePage={setActivePage}
+            setSearchQuery={setSearchQuery}
+            onSelectCourse={handleSelectCourse}
+            onEnroll={handleEnroll}
+            onLearn={handleLearn}
+          />
         )}
       </main>
 
